@@ -1,131 +1,186 @@
-📘 Basis Data Part 8 – Clean and Transform Data dengan OpenRefine
-README.md – Siap untuk GitHub
-Mata Kuliah: Basis Data
-Pengampu: Khamarudin Syarif
+# 📘 Basis Data Part 8 – Data Cleansing dengan OpenRefine
 
-📌 Pendahuluan
-Pada Basis Data Part 8, kita akan mempelajari cara membersihkan dan mengubah data menggunakan OpenRefine, sebuah alat open-source yang sangat powerful untuk bekerja dengan data yang “berantakan” (messy data). Setelah data dibersihkan, kita akan mengonversinya ke dalam format SQL untuk disimpan dalam basis data.
+> **README.md – Siap untuk GitHub**
+> Mata Kuliah: Basis Data
+> Pengampu: Khamarudin Syarif
 
-Dokumentasi ini disusun dalam format Markdown dan siap digunakan sebagai README di GitHub, dilengkapi dengan penjelasan langkah-langkah dan panduan praktis.
+---
 
-🧼 Apa itu OpenRefine?
-OpenRefine adalah alat berbasis web yang digunakan untuk:
+## 📌 Pendahuluan
 
-Membersihkan data yang tidak konsisten
+Pada **Basis Data Part 8**, pembahasan berfokus pada proses **Data Cleansing (Pembersihan Data)** menggunakan tools **OpenRefine**. Data cleansing merupakan tahap penting sebelum data dianalisis karena data mentah sering mengandung kesalahan seperti duplikasi, inkonsistensi penulisan, dan nilai kosong.
 
-Mengubah format data
+Dokumentasi ini disusun dalam format **Markdown** sehingga dapat langsung digunakan sebagai **README di GitHub**, serta telah dilengkapi dengan **quiz dan jawaban lengkap** sesuai materi Part 8.
 
-Menghubungkan dan menggabungkan dataset
+---
 
-Menyiapkan data untuk analisis lebih lanjut atau import ke basis data
+## 🧹 Apa itu Data Cleansing?
 
-🚀 Langkah 1: Memulai OpenRefine
-Instalasi & Menjalankan
-Download OpenRefine dari openrefine.org
+**Data Cleansing** adalah proses memperbaiki atau menghapus data yang:
 
-Ekstrak dan jalankan file openrefine.exe (Windows) atau openrefine (Mac/Linux)
+* Duplikat
+* Tidak konsisten (huruf besar/kecil, salah ejaan)
+* Tidak lengkap (NULL / kosong)
+* Tidak sesuai format
 
-Buka browser dan akses http://127.0.0.1:3333
+Tujuan utama data cleansing adalah memastikan data **akurat, konsisten, dan siap dianalisis**.
 
-📂 Langkah 2: Import Data ke OpenRefine
-Jenis File yang Didukung:
-CSV, TSV, Excel (.xls, .xlsx)
+---
 
-JSON, XML, RDF
+## 🛠️ Pengenalan OpenRefine
 
-Data dari Clipboard, URL, atau Database
+**OpenRefine** adalah aplikasi open-source yang digunakan untuk:
 
-Cara Import:
-Klik Create Project
+* Membersihkan data
+* Menyeragamkan format data
+* Mendeteksi duplikasi
+* Melakukan transformasi data
 
-Pilih sumber data:
+### 🔗 Website Resmi
 
-This Computer → upload file dari komputer
+[https://openrefine.org](https://openrefine.org)
 
-Clipboard → tempel data langsung
+---
 
-URL → impor dari alamat web
+## 📥 Import Data ke OpenRefine
 
-Konfigurasi format data (pemisah kolom, encoding, dll.)
+### Langkah-langkah Import Data
 
-Klik Create Project
+1. Jalankan OpenRefine
+2. Klik **Create Project**
+3. Pilih file (CSV / Excel / TSV)
+4. Klik **Next**
+5. Klik **Create Project**
 
-🧹 Langkah 3: Membersihkan Data
-Operasi Umum dalam OpenRefine:
-Text Facet → melihat distribusi nilai unik
+---
 
-Cluster and Edit → menggabungkan nilai yang mirip
+## 🔍 Facet & Filter
 
-Transform → ubah format teks, tanggal, angka
+### Text Facet
 
-Split Column → memisahkan kolom berdasarkan delimiter
+Digunakan untuk melihat variasi nilai dalam satu kolom.
 
-Fill Down → mengisi nilai kosong dengan nilai di atasnya
+Contoh penggunaan:
 
-Contoh Transformasi:
-json
-value.trim().toUpperCase()
-digunakan untuk menghapus spasi dan mengubah teks menjadi huruf besar.
+* Mendeteksi perbedaan penulisan: `Jakarta`, `jakarta`, `JKT`
 
-📤 Langkah 4: Export Data ke SQL
-Setelah data bersih, kita dapat mengekspornya ke dalam format SQL untuk dibuat tabel di basis data.
+### Numeric Facet
 
-Contoh Membuat Tabel Customer:
-sql
-CREATE TABLE Customer (
-    id INT PRIMARY KEY,
-    Name VARCHAR(100),
-    address TEXT,
-    Gender CHAR(1),
-    phone VARCHAR(20),
-    email VARCHAR(100),
-    DOB DATE
-);
-📝 Quiz: Clean & Transform Data
-Soal:
-Bersihkan dan transformasikan file berikut dengan OpenRefine:
+Digunakan untuk memfilter data numerik berdasarkan rentang nilai.
 
-Customer.txt
+---
 
-Invoice.txt
+## ✏️ Transformasi Data
 
-Payment.txt
+Beberapa transformasi umum di OpenRefine:
 
-Product.txt
+* **To Uppercase** → mengubah teks ke huruf besar
+* **To Lowercase** → mengubah teks ke huruf kecil
+* **Trim leading and trailing whitespace** → menghapus spasi berlebih
 
-Subscription.txt
+---
 
-Kemudian import data tersebut ke dalam SQL dengan nama tabel sesuai nama file.
+## 🧩 Cluster & Edit
 
-✅ Tugas:
-Import masing-masing file ke OpenRefine
+Fitur **Cluster & Edit** digunakan untuk:
 
-Lakukan pembersihan data (hilangkan duplikat, format konsisten, dll.)
+* Mendeteksi data yang mirip
+* Menggabungkan data dengan makna sama
 
-Export data bersih ke format CSV atau SQL
+Contoh:
 
-Buat tabel SQL sesuai struktur data
+* `Bandung`, `Bandung `, `BANDUNG`
 
-Masukkan nama dan NIM pada kolom kedua setiap tabel
+---
 
-Screenshot setiap tabel (total 5 screenshot)
+## 📤 Export Data
 
-🧠 Tips & Best Practices
-Selalu backup data sebelum transformasi besar
+Setelah proses cleansing selesai, data dapat diekspor kembali.
 
-Gunakan Undo/Redo history di OpenRefine
+### Langkah Export Data
 
-Simpan project OpenRefine untuk revisi
+1. Klik **Export**
+2. Pilih format (CSV / Excel)
+3. Data siap digunakan
 
-Validasi data sebelum import ke SQL
+---
 
-✅ Penutup
-Dengan OpenRefine, proses pembersihan dan transformasi data menjadi lebih terstruktur, efisien, dan dapat dilacak. Data yang bersih adalah fondasi penting untuk analisis yang akurat dan pengambilan keputusan yang baik.
+# 📝 QUIZ BASIS DATA PART 8
 
-🔗 Referensi
-OpenRefine Documentation
+## Quiz 1
 
-MySQL Documentation
+**Apa tujuan utama data cleansing sebelum analisis data?**
 
-Data Cleaning Best Practices
+✅ **Jawaban:**
+Untuk memastikan data bersih, konsisten, dan akurat sehingga hasil analisis lebih valid.
 
+---
+
+## Quiz 2
+
+**Tools apa yang digunakan pada Part 8 untuk data cleansing?**
+
+✅ **Jawaban:**
+OpenRefine
+
+---
+
+## Quiz 3
+
+**Fitur apa yang digunakan untuk melihat variasi data dalam satu kolom?**
+
+✅ **Jawaban:**
+Text Facet
+
+---
+
+## Quiz 4
+
+**Bagaimana cara mengubah seluruh teks menjadi huruf kecil di OpenRefine?**
+
+✅ **Jawaban:**
+Edit cells → Common transforms → To lowercase
+
+---
+
+## Quiz 5
+
+**Apa fungsi fitur Cluster & Edit?**
+
+✅ **Jawaban:**
+Untuk mendeteksi dan menggabungkan data yang memiliki makna sama tetapi penulisan berbeda.
+
+---
+
+## Quiz 6
+
+**Sebutkan dua manfaat utama data cleansing.**
+
+✅ **Jawaban:**
+
+1. Meningkatkan kualitas dan akurasi data
+2. Mengurangi kesalahan dalam analisis dan pengambilan keputusan
+
+---
+
+## Quiz 7
+
+**Bagaimana cara mengekspor data hasil cleansing dari OpenRefine?**
+
+✅ **Jawaban:**
+Klik Export → pilih format file → data siap digunakan
+
+---
+
+## ✅ Penutup
+
+Dengan memahami proses data cleansing menggunakan OpenRefine, pengguna dapat memastikan bahwa data yang digunakan untuk analisis sudah bersih, konsisten, dan siap digunakan. Materi ini melengkapi rangkaian pembelajaran Basis Data dari Part 1 hingga Part 8.
+
+---
+
+## 🔗 Referensi
+
+* [https://docs.google.com/document/d/1d-D4jaue8dK8bc65MHFJfA59SpBcjn7gMapTeXlJPME/edit?usp=sharing]
+* [https://openrefine.org](https://openrefine.org)
+* [https://www.mysql.com](https://www.mysql.com)
+* [https://learn.microsoft.com/sql](https://learn.microsoft.com/sql)
